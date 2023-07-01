@@ -15,7 +15,7 @@ import wifi
 from duckyinpython import *
 
 payload_html = """<!DOCTYPE html>
-<html style="background-color: #131516; color: white;">
+<html style="width: 100%; height: 100vh; background-color: #131516; color: white;">
     <head>
         <title>Pico W Ducky</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@ payload_html = """<!DOCTYPE html>
 """
 
 edit_html = """<!DOCTYPE html>
-<html style="background-color: #131516; color: white;">
+<html style="width: 100%; height: 100vh; background-color: #131516; color: white;">
   <head>
     <title>Script Editor</title>
     <style>.home,.submit{{color:#fff;padding:5px 10px;font-size:.9em;border-radius:5px;text-transform:uppercase}}textarea:focus{{outline:0}}.submit{{background:#333}}.home{{background:#0c47c7;text-decoration:none}}</style>
@@ -50,7 +50,7 @@ edit_html = """<!DOCTYPE html>
 """
 
 new_html = """<!DOCTYPE html>
-<html style="background-color: #131516; color: white;">
+<html style="width: 100%; height: 100vh; background-color: #131516; color: white;">
   <head>
     <title>New Script</title>
     <style>.home,.submit{{color:#fff;padding:5px 10px;font-size:.9em;border-radius:5px;text-transform:uppercase}}p{{line-height:0}}textarea:focus{{outline:0}}.script-name{{resize:none}}.script-data{{width:500px;height:25vh}}.submit{{background:#333}}.home{{background:#0c47c7;text-decoration:none}}</style>
@@ -71,7 +71,7 @@ new_html = """<!DOCTYPE html>
 """
 
 response_html = """<!DOCTYPE html>
-<html style="background-color: #131516; color: white;">
+<html style="width: 100%; height: 100vh; background-color: #131516; color: white;">
     <head> 
         <title>Pico W Ducky</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
