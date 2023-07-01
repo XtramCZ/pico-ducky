@@ -15,65 +15,76 @@ import wifi
 from duckyinpython import *
 
 payload_html = """<!DOCTYPE html>
-<html>
-    <head> <title>Pico W Ducky</title> </head>
+<html style="background-color: #131516; color: white;">
+    <head>
+        <title>Pico W Ducky</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>*{{font-family:Verdana,Geneva,Tahoma,sans-serif;font-weight:400}}a{{text-transform:uppercase;text-decoration:none}}.delete,.edit,.run{{color:#fff;padding:1px 5px;font-size:1em;border-radius:5px}}.edit{{color:#0032ff}}.delete{{color:red}}.run{{color:#4BB543}}td{{padding:0 20px}}.new{{color:#fff;background:#333;padding:5px 10px;font-size:.9em;border-radius:5px}}</style>
+    </head>
     <body> <h1>Pico W Ducky</h1>
-        <table border="1"> <tr><th>Payload</th><th>Actions</th></tr> {} </table>
+        <table border="1"> <tr><th>PAYLOAD</th><th>ACTIONS</th></tr>
+        {}
+        </table>
         <br>
-        <a href="/new">New Script</a>
+        <a href="/new" class="new">New Script</a>
     </body>
 </html>
 """
 
 edit_html = """<!DOCTYPE html>
-<html>
+<html style="background-color: #131516; color: white;">
   <head>
     <title>Script Editor</title>
+    <style>.home,.submit{{color:#fff;padding:5px 10px;font-size:.9em;border-radius:5px;text-transform:uppercase}}textarea:focus{{outline:0}}.submit{{background:#333}}.home{{background:#0c47c7;text-decoration:none}}</style>
   </head>
   <body>
     <form action="/write/{}" method="POST">
       <textarea rows="5" cols="60" name="scriptData">{}</textarea>
       <br/>
-      <input type="submit" value="submit"/>
+      <input type="submit" value="submit" class="submit"/>
     </form>
     <br>
-    <a href="/ducky">Home</a>
+    <a href="/ducky" class="home">Home</a>
   </body>
 </html>
 """
 
 new_html = """<!DOCTYPE html>
-<html>
+<html style="background-color: #131516; color: white;">
   <head>
     <title>New Script</title>
+    <style>.home,.submit{{color:#fff;padding:5px 10px;font-size:.9em;border-radius:5px;text-transform:uppercase}}p{{line-height:0}}textarea:focus{{outline:0}}.script-name{{resize:none}}.script-data{{width:500px;height:25vh}}.submit{{background:#333}}.home{{background:#0c47c7;text-decoration:none}}</style>
   </head>
   <body>
     <form action="/new" method="POST">
-      Script Name<br>
-      <textarea rows="1" cols="60" name="scriptName"></textarea>
-      Script<br>
-      <textarea rows="5" cols="60" name="scriptData"></textarea>
+      <p>Script Name</p>
+      <textarea rows="1" cols="60" name="scriptName" class="script-name"></textarea>
+      <p>Script content</p>
+      <textarea rows="5" cols="60" name="scriptData" class="script-data"></textarea>
       <br/>
-      <input type="submit" value="submit"/>
+      <input type="submit" value="submit" class="submit"/>
     </form>
     <br>
-    <a href="/ducky">Home</a>
+    <a href="/ducky" class="home">Home</a>
   </body>
 </html>
 """
 
 response_html = """<!DOCTYPE html>
-<html>
-    <head> <title>Pico W Ducky</title> </head>
+<html style="background-color: #131516; color: white;">
+    <head> 
+        <title>Pico W Ducky</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <style>*{{font-family:Verdana,Geneva,Tahoma,sans-serif;font-weight:400}}.home{{color:#fff;background:#0c47c7;padding:5px 10px;font-size:.9em;border-radius:5px;text-transform:uppercase;text-decoration:none}}</style>
+    </head>
     <body> <h1>Pico W Ducky</h1>
-        {}
-        <br>
-        <a href="/ducky">Home</a>
+        <p>{}</p>
+        <a href="/ducky" class="home">Home</a>
     </body>
 </html>
 """
 
-newrow_html = "<tr><td>{}</td><td><a href='/edit/{}'>Edit</a> / <a href='/delete/{}'>Delete</a> / <a href='/run/{}'>Run</a></tr>"
+newrow_html = "<tr><td>{}</td><td><a href='/edit/{}' class='edit'>Edit</a> <a href='/delete/{}' class='delete'>Delete</a> <a href='/run/{}' class='run'>Run</a></tr>"
 
 def setPayload(payload_number):
     if(payload_number == 1):
@@ -90,12 +101,13 @@ def ducky_main(request):
     payloads = []
     rows = ""
     files = os.listdir()
-    #print(files)
+    print(files)
     for f in files:
         if ('.dd' in f) == True:
             payloads.append(f)
+            print(payloads)
             newrow = newrow_html.format(f,f,f,f)
-            #print(newrow)
+            print(newrow)
             rows = rows + newrow
 
     response = payload_html.format(rows)
